@@ -10,6 +10,7 @@ open(my $FH,'>',$temp) or die "can't open file $temp $!\n";
 
     my $input = shift;
     my $filtered = shift;
+    my $key = shift;
     my $cnv_cutoff = shift;
 
     unless ($cnv_cutoff){$cnv_cutoff =0}
@@ -170,10 +171,11 @@ while(my $filt_line = <MATCH>){
 	    $EXONTRUE = $feat_filt[9];
 	    $probeset_filt = $chr_filt . ':' . $start_filt . '-' . $stop_filt;
         
-	    $sample_match = $genes{$id_filt}{$probeset_filt};
+#	    $sample_match = $genes{$id_filt}{$probeset_filt};
+	    $sample_match = $genes{$key}{$probeset_filt};
 
 	    if($sample_match){
-	    print $FH "$id_filt","\t","$probeset_filt","\t","$sample_match","\t","$log2","\t","$PVAL","\t","$EXONTRUE\n"; 
+	    print $FH "$key","\t","$probeset_filt","\t","$sample_match","\t","$log2","\t","$PVAL","\t","$EXONTRUE\n"; 
 	    }
 	    
 	    else{
